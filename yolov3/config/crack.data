@@ -1,0 +1,6 @@
+classes= 1
+train=data/crack/train.txt
+valid=data/crack/val.txt
+names=data/crack/crack.names
+backup=backup/
+eval=coco
