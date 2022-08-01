@@ -36,7 +36,7 @@ def convert(size, box):
         h = h * dh
         return (x, y, w, h)
 
-def convert_annotation(image_id,DETECT_CLASS):
+def convert_annotation(SAVE_PATH,image_id,DETECT_CLASS):
         in_file = open(SAVE_PATH+'/Annotations/%s.xml' % (image_id), 'r', encoding="UTF-8")
         out_file = open(SAVE_PATH+'/labels/%s.txt' % (image_id), 'w')
         tree = ET.parse(in_file)
@@ -58,7 +58,7 @@ def convert_annotation(image_id,DETECT_CLASS):
             out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
 
 
-def spilt_dataset_coco(XML_PATH,TRAIN_VAL_PRECE,DATASET_CLASS,DETECT_CLASS):
+def spilt_dataset_coco(XML_PATH,SAVE_PATH,TRAIN_VAL_PRECE,DATASET_CLASS,DETECT_CLASS):
     total_xml = os.listdir(XML_PATH)
     num = len(total_xml)
     list = range(num)
@@ -84,7 +84,7 @@ def spilt_dataset_coco(XML_PATH,TRAIN_VAL_PRECE,DATASET_CLASS,DETECT_CLASS):
         list_file = open(SAVE_PATH+'/%s.txt' % (image_set), 'w')
         for image_id in image_ids:
             list_file.write(SAVE_PATH+'/images/%s.jpg\n' % (image_id))#
-            convert_annotation(image_id,DETECT_CLASS)
+            convert_annotation(SAVE_PATH,image_id,DETECT_CLASS)
         list_file.close()
 
 
@@ -113,10 +113,10 @@ def template_dataset(ROOT_PATH,SAVE_PATH,CLASS_NAME,TRAIN_VAL_PRECE=None):
     DATASET_CLASS = ['train','val']
     XML_PATH = SAVE_PATH+'/Annotations/'
     if TRAIN_VAL_PRECE  is not None:
-        spilt_dataset_coco(XML_PATH,TRAIN_VAL_PRECE,DATASET_CLASS,CLASS_NAME)
+        spilt_dataset_coco(XML_PATH,SAVE_PATH,TRAIN_VAL_PRECE,DATASET_CLASS,CLASS_NAME)
 
     desired_caps = {
-    'train':SAVE_PATH+"/val.txt",
+    'train':SAVE_PATH+"/train.txt",
     'val':SAVE_PATH+"/val.txt",
     'nc':len(CLASS_NAME),
     'names':CLASS_NAME,
