@@ -180,9 +180,9 @@ def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val
 
 if __name__ == '__main__':
 
-    ROOT_PATH = r"E:\Data\鸟巢\JPEGImages"
-    SAVE_PATH = r"E:\Data\111_test"
-    CLASS_NAME = ['nc']
+    ROOT_PATH = ...
+    SAVE_PATH = ...
+    CLASS_NAME = ...
     # train_val_prece = 0.1 
     convert2tempDatafolder(ROOT_PATH,SAVE_PATH,CLASS_NAME)
 
