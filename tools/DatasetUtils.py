@@ -8,9 +8,11 @@
 @Desc    :   To convert dataset formats for YOLOv5 in windows and Linux environments.
 '''
 
-from asyncio.log import logger
+# from asyncio.log import logger
+from logging import warning
 import os
 import shutil
+from tkinter import E
 import yaml
 import random
 import xml.etree.ElementTree as ET
@@ -30,6 +32,7 @@ def _convert(size:list, box:list)->list:
     """    
     dw = 1. / size[0]
     dh = 1. / size[1]
+    #TODO：check (x,y,width,height) 
     x = (box[0] + box[1]) / 2.0
     y = (box[2] + box[3]) / 2.0
     w = box[1] - box[0]
@@ -72,7 +75,8 @@ def _convert_annotation(save_path:str,image_id:str,det_class:list)->None:
             bb = _convert((w, h), b)
             out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
     except:
-        logger.error("Failed to convert xml, dut to the wrong structured format.",exc_info=True)
+        pass
+        # logger.error("Failed to convert xml, dut to the wrong structured format.",exc_info=True)
 
 def _spilt_dataset_coco(save_path:str,train_val_prece:float,det_class:list,dataset_name:list=['train','val'])->None:
     """template for generating dataset_coco format
@@ -102,20 +106,32 @@ def _spilt_dataset_coco(save_path:str,train_val_prece:float,det_class:list,datas
     ftrain.close()
     fval.close()
 
-    for image_set in tqdm(dataset_name):
+    for image_set in dataset_name:
         if not os.path.exists(os.path.join(save_path,'labels')):
             os.makedirs(os.path.join(save_path,'labels'))
         image_ids = open(os.path.join(save_path,'ImageSets','%s.txt' % (image_set))).read().strip().split()
         list_file = open(os.path.join(save_path,'%s.txt' % (image_set)), 'w')
-        for image_id in image_ids:
-            list_file.write(os.path.join(save_path,'images','%s.jpg\n' % (image_id)))#
-            _convert_annotation(save_path,image_id,det_class)
+        _image_temp = os.listdir(os.path.join(save_path,"JPEGImages"))
+        image_type = os.path.splitext(_image_temp[0])[1]
+        for image_id in tqdm(image_ids,desc=f'converting annotations in {image_set}'):
+            #TODO: add image type: JPG/jpg/jpeg etc...
+            if image_type == '.jpg':
+                list_file.write(os.path.join(save_path,'images','%s.jpg\n' % (image_id)))#
+                _convert_annotation(save_path,image_id,det_class)
+            elif image_type == '.JPG':
+                list_file.write(os.path.join(save_path,'images','%s.JPG\n' % (image_id)))#
+                _convert_annotation(save_path,image_id,det_class)
+            else:
+                print("unknown image type!")
         list_file.close()
 
 def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val_prece:float=0.2)->None:
     """convert2tempDatafolder with  dataset_coco format 
     Note that: this function is used to convert dataset from labelimg to 
     train the yolov5 (suitable model), maybe also fit other yolo-series models.
+    intput: (JPG and XML files) folder
+    output: (ROOT path + annotations folder, images folder, JPEGImages folder, imagesets folder, train.txt and val.txt)
+    # please check JPG and jpg ！
 
     Args:
         root_path (str): image and XML file generated from labelimg directly.
@@ -123,27 +139,33 @@ def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val
         class_name (list): select the detection class to use.
         train_val_prece (float, optional): spilt the datasets with the given ratio. Defaults to 0.2.
     """
+
+    warning("CHECK: target annotation axis is (x,y,width,height)")
+    warning(f"CHECK: train_val_prece is {train_val_prece}")
     if not os.path.exists(save_path):
         file_set =['Annotations','images','ImageSets','JPEGImages']
         for file_name in file_set:
             os.makedirs(os.path.join(save_path,file_name))
     
     img_set = []
+    xml_set = []
+    #TODO: add image type: JPG/jpg/jpeg etc...
     for img_name in os.listdir(root_path):
-        if os.path.splitext(img_name)[1]=='.jpg':
+        if os.path.splitext(img_name)[1]=='.jpg' or os.path.splitext(img_name)[1]== ".JPG":
             img_set.append(img_name)
-    for img_name in img_set: 
+        elif os.path.splitext(img_name)[1]=='.xml':
+            xml_set.append(img_name)
+        else:
+            warning("Unknown formats!")
+
+    for img_name in tqdm(img_set,desc='Images copying'): 
         shutil.copyfile(os.path.join(root_path,img_name),os.path.join(save_path,'images',img_name),)
         shutil.copyfile(os.path.join(root_path,img_name),os.path.join(save_path,'JPEGImages',img_name))
 
-    xml_set = []
-    for xml_name in os.listdir(root_path):
-        if os.path.splitext(xml_name)[1]=='.xml':
-            xml_set.append(xml_name)
-    for xml_name in xml_set: 
+    for xml_name in tqdm(xml_set,desc='XMLs copying'): 
         shutil.copyfile(os.path.join(root_path,xml_name),os.path.join(save_path,'Annotations',xml_name))
 
-    if train_val_prece  is not None:
+    if train_val_prece is not None:
         _spilt_dataset_coco(save_path,train_val_prece,class_name)
 
     desired_caps = {
@@ -158,9 +180,9 @@ def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val
 
 if __name__ == '__main__':
 
-    ROOT_PATH = r"E:\Data\浮筒_PS"
+    ROOT_PATH = r"E:\Data\鸟巢\JPEGImages"
     SAVE_PATH = r"E:\Data\111_test"
-    CLASS_NAME = ["ftqx",'ljdl']
+    CLASS_NAME = ['nc']
     # train_val_prece = 0.1 
     convert2tempDatafolder(ROOT_PATH,SAVE_PATH,CLASS_NAME)
 
