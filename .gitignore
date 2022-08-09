@@ -1,0 +1,2 @@
+**/__pycache__                                                                    //忽略pycache缓存文件
+.gitignore              //忽略这个.gitignore文件
