@@ -1,0 +1,74 @@
+####PDF_information
+project_version: ft_0.1
+developer: wengjiangwei
+email_config :  /home/wjw/Work/Honey/email_config.yaml
+
+###### project settings #################################
+PDF_path : /home/wjw/Work/YOLOV5_PDF
+ # type=str, default='...', help:training result file path
+root_path : /home/wjw/Work/Data/A_Rawdata/ft_AutoXML_729
+ # type=str, default='...', help:raw image path that save the XML and JPG files.
+anno_path : /home/wjw/Work/Data/ft_AutoXML_729
+ # type=str, default='...', help:annotations and images folder.
+data : /home/wjw/Work/Data/ft_AutoXML_729/data.yaml
+ # type=str, default='...', help:annotations and images folder.
+class_name : ["ftqx", 'ljdl']
+ # type=list,  help:detection classes.
+train_val_prec: 0.1
+ # type=float,  default=01, help:train and val samples ratio.
+project_path : /home/wjw/Work/Runs/v5-test
+ # same with project      #TODO:ignore the name
+project : /home/wjw/Work/Runs/v5-test
+ # default='./runs/train', help='save to project/name'
+name : 'ft'
+ # type=str, default='exp', help='save to project/name'
+imgsz : 640 
+ # type=int, default=640, help='train, val image size (pixels'
+
+
+
+###### yolo settings #################################
+weights : /home/wjw/Work/Weights/YOLOV5/yolov5l.pt
+ # type=str, default='./yolov5s.pt', help='initial weights path'
+cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5l.yaml
+ # type=str, default='', help='model.yaml path'
+hyp : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/data/hyps/hyp.scratch-low.yaml
+ # type=str, default='./data/hyps/hyp.scratch-low.yaml', help='hyperparameters path'
+epochs : 10 
+ # type=int, default=300
+batch-size : 8 
+ # type=int, default=16, help='total batch size for all GPUs, -1 for autobatch'
+device : ''
+ #  default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu'
+optimizer : 'SGD'
+ #  type=str, choices=['SGD', 'Adam', 'AdamW'], default='SGD', help='optimizer'
+
+
+##############################################################################
+##############################################################################
+#  entity :#  default=None, help='W&B: Entity'
+#  upload_dataset :#  nargs='?', const=True, default=False, help='W&B: Upload data, "val" option'
+#  bbox_interval :#  type=int, default=-1, help='W&B: Set bounding-box image logging interval'
+#  artifact_alias :#  type=str, default='latest', help='W&B: Version of dataset artifact to use'
+#  sync-bn :#  action='store_true', help='use SyncBatchNorm, only available in DDP mode'
+#  workers :#  type=int, default=8, help='max dataloader workers (per RANK in DDP mode'
+#  single-cls :# action='store_true', help='train multi-class data as single-class'
+#  multi-scale :#  action='store_true', help='vary img-size +/- 50%%'
+#  rect : #  action='store_true', help='rectangular training'
+#  resume : #  nargs='?', const=True, default=False, help='resume most recent training'
+#  nosave :# action='store_true', help='only save final checkpoint'
+#  noval :#  action='store_true', help='only validate final epoch'
+#  noautoanchor :#  action='store_true', help='disable AutoAnchor'
+#  noplots :#  action='store_true', help='save no plot files'
+#  evolve :#  type=int, nargs='?', const=300, help='evolve hyperparameters for x generations'
+#  bucket :#  type=str, default='', help='gsutil bucket'
+#  cache :#  type=str, nargs='?', const='ram', help='--cache images in "ram" (default or "disk"'
+#  image-weights :#  action='store_true', help='use weighted image selection for training'
+#  exist-ok :#  action='store_true', help='existing project/name ok, do not increment'
+#  quad :# action='store_true', help='quad dataloader'
+#  cos-lr :#  action='store_true', help='cosine LR scheduler'
+#  label-smoothing :#  type=float, default=0.0, help='Label smoothing epsilon'
+#  patience :# type=int, default=100, help='EarlyStopping patience (epochs without improvement'
+#  freeze :#  nargs='+', type=int, default=[0], help='Freeze layers: backbone=10, first3=0 1 2'
+#  save-period :#  type=int, default=-1, help='Save checkpoint every x epochs (disabled if < 1'
+#  local_rank :#  type=int, default=-1, help='Automatic DDP Multi-GPU argument, do not modify'

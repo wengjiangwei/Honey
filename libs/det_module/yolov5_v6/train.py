@@ -34,7 +34,7 @@ FILE = Path(__file__).resolve()
 ROOT_yolo5 = FILE.parents[0]  
 if str(ROOT_yolo5) not in sys.path:
     sys.path.append(str(ROOT_yolo5))  
-# ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+# opt.project = Path(os.path.relpath(opt.project, Path.cwd()))  # relative
 
 import val  # for end-of-epoch mAP
 from models.experimental import attempt_load  #####################
@@ -521,7 +521,7 @@ def parse_opt(known=False):
     return opt
 
 
-def main(ROOT,opt, callbacks=Callbacks()):
+def main(opt, callbacks=Callbacks()):
     # Checks 检查参数情况、git更新
     if RANK in {-1, 0}:
         print_args(vars(opt))
@@ -541,8 +541,8 @@ def main(ROOT,opt, callbacks=Callbacks()):
             check_file(opt.data), check_yaml(opt.cfg), check_yaml(opt.hyp), str(opt.weights), str(opt.project)  # checks
         assert len(opt.cfg) or len(opt.weights), 'either --cfg or --weights must be specified'
         if opt.evolve:
-            if opt.project == str(ROOT / 'runs/train'):  # if default project name, rename to runs/evolve
-                opt.project = str(ROOT / 'runs/evolve')
+            if opt.project == str(opt.project / 'runs/train'):  # if default project name, rename to runs/evolve
+                opt.project = str(opt.project / 'runs/evolve')
             opt.exist_ok, opt.resume = opt.resume, False  # pass resume to exist_ok and disable resume
         if opt.name == 'cfg':
             opt.name = Path(opt.cfg).stem  # use model.yaml as name
@@ -657,13 +657,12 @@ def main(ROOT,opt, callbacks=Callbacks()):
                     f'Usage example: $ python train.py --hyp {evolve_yaml}')
 
 
-def run(ROOT,**kwargs):
+def run(**kwargs):
     # Usage: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m.pt')
-    ROOT = ROOT
     opt = parse_opt(True)
     for k, v in kwargs.items():
         setattr(opt, k, v)
-    main(ROOT,opt)
+    main(opt)
     return opt
 
 

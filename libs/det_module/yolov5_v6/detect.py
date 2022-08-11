@@ -32,7 +32,7 @@ from pathlib import Path
 import torch
 import torch.backends.cudnn as cudnn
 from Honey.utils import plots
-from Honey.postprocess.Img_filter import func_filter_img
+from Honey.tools.postprocess.Img_filter import func_filter_img
 FILE = Path(__file__).resolve()
  # YOLOv5 root directory
 if str(FILE.parents[0]) not in sys.path:
