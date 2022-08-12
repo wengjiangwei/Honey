@@ -1,3 +1,4 @@
 **/__pycache__                                                               //忽略pycache缓存文件
 *.pyc
 **/wandb
+**/__pycache__
