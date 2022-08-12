@@ -6,4 +6,4 @@ port: 'smtp.163.com'
 recipient: wjw_9396@163.com
 email_title: YOLOv5 training report
 email_content: Please see the attachment file for more information
-email_attachment: /home/wjw/report.pdf
+

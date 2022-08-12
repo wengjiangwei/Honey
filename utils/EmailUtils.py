@@ -11,7 +11,7 @@
 
 import yagmail
 import yaml
-
+import traceback
 class AutoEmail():
     def __init__(self):
         pass
@@ -37,7 +37,7 @@ class AutoEmail():
         self.yagmail_server = yagmail.SMTP(user=user, password=password, host=host)
         return self.yagmail_server
         
-    def send(self, email_name:str, email_title:str, email_content:list, email_attachment:list):
+    def send(self, email_name:str, email_title:str, email_content:list, email_attachment:list=None):
         """send the email to the email_name, you can send to your own email address.
         
         Parameters
@@ -56,9 +56,19 @@ class AutoEmail():
             print("Sent email successfully")
         except Exception:
             print("Failed to send email")
+            print(traceback.format_exc())
 
-def config2email(email_config):
+
+
+def config2email(email_config,email_attachment):
     email_config = yaml.load(open(email_config), Loader=yaml.FullLoader)
     email_send = AutoEmail()
     email_send.smtp_infor(email_config['user'],email_config['password'],email_config['port'])
-    email_send.send(email_config['recipient'],email_config['email_title'], email_config['email_content'], email_config['email_attachment'])
+    email_send.send(email_config['recipient'],email_config['email_title'], email_config['email_content'], email_attachment)
+
+
+def config2email_error(email_config,error_infor):
+    email_config = yaml.load(open(email_config), Loader=yaml.FullLoader)
+    email_send = AutoEmail()
+    email_send.smtp_infor(email_config['user'],email_config['password'],email_config['port'])
+    email_send.send(email_config['recipient'],email_config['email_title'], error_infor)

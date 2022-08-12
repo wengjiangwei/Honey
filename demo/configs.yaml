@@ -1,7 +1,6 @@
 ####PDF_information
 project_version: ft_0.1
 developer: wengjiangwei
-email_config :  /home/wjw/Work/Honey/email_config.yaml
 
 ###### project settings #################################
 PDF_path : /home/wjw/Work/YOLOV5_PDF

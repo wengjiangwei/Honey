@@ -111,13 +111,14 @@ class TrainReport_yolov5(Report_base):
         doc = Document('report',geometry_options=geometry_options)
         doc.packages.append(Package('float'))
         doc.preamble.append(Command('title', f'Training Report {project_infor[0]}'))
-        doc.preamble.append(Command('author', f'TXKJ@{project_infor[1]}'))
+        doc.preamble.append(Command('author', f'{project_infor[1]}'))
         doc.preamble.append(Command('date', NoEscape(r'\today')))
 
         doc.append(NoEscape('\maketitle'))
         self._fill_document(doc)
         doc.generate_pdf(os.path.join(self.PDF_path,f'report {project_infor[0]}'), clean_tex=False)
         tex = doc.dumps()
+        return os.path.join(self.PDF_path,f'report {project_infor[0]}.pdf') # PDF Document
 
 
     def _fill_document(self, doc):
