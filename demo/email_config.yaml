@@ -1,0 +1,9 @@
+
+user: XXXXXX@163.com
+password: XXXXXXXXXXXX
+port: 'smtp.163.com'
+
+recipient: XXXXX@163.com
+email_title: YOLOv5 training report
+email_content: Please see the attachment file for more information
+
