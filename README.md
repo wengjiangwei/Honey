@@ -25,7 +25,7 @@ Computer vision toolbox for agile development
   <p align="center">
     一个"便捷"的开发模板去快速开始你的项目！
     <br />
-    <a href="https://github.com/shaojintian/Best_README_template"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/wengjiangwei/Honey"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="https://github.com/wengjiangwei/Honey/tree/main/demo">查看Demo</a>
