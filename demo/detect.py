@@ -44,8 +44,8 @@ def main(opt:argparse):
         PDF_PATH = yaml_data['PDF_path']
         GT_XML_ROOT = yaml_data['gt_xml_root']
         TARGET = yaml_data['target']
-        IOU_THERSHOLD = yaml_data['iou_thershold']
-        pop_list = ['project_version','developer','PDF_path','gt_xml_root','target','iou_thershold']
+        IOU_THERSHOLD = yaml_data['iou_thres']
+        pop_list = ['project_version','developer','PDF_path','gt_xml_root','target']
         for pop_i in pop_list:
             yaml_data.pop(pop_i)
 
