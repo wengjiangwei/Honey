@@ -26,6 +26,7 @@ from Honey.tools import DatasetUtils
 from Honey.libs.det_module.yolov5_v6 import train as yolov5_train
 from Honey.tools.ReportUtils import TrainReport_yolov5
 from Honey.utils.EmailUtils import config2email,config2email_error
+from Honey.utils.common import report_max_idx
 import traceback
 #TODO: YOLOV5  --- other model
 
@@ -81,33 +82,6 @@ def run(**kwargs):
     main(opt)
 
     return opt
-
-def report_max_idx(project_path:str, name:str)->str:
-    """Find the latest version of the project save path
-    (According to the max index of the project)
-
-    Parameters
-    ----------
-    project_path : str
-        the  project save path
-    name : str
-        project_version
-
-    Returns
-    -------
-    str
-        the latest version of the project save path
-    """
-    project_all = []
-    project_list = os.listdir(project_path)
-    for filename in project_list:
-        if name in filename:
-            try:
-                project_idx = re.findall("\d+", filename)
-                project_all.append(int(project_idx[0]))
-            except Exception:
-                continue
-    return os.path.join(project_path, f"{name}{max(project_all)}")
 
 if __name__ == '__main__':
 

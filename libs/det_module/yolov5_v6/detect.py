@@ -76,6 +76,7 @@ def run(
         half=False,  # use FP16 half-precision inference
         dnn=False, # use OpenCV DNN for ONNX inference
         save_xml = False,# XML file
+        save_fusion_images = False, # save_fusion_images (image, conf and class)
         filter_img = None,
 
 ):
@@ -184,6 +185,7 @@ def run(
                         xmin,ymin,xmax,ymax = int(xyxy[0].cpu().numpy()),int(xyxy[1].cpu().numpy()),int(xyxy[2].cpu().numpy()),int(xyxy[3].cpu().numpy())
                         objects['bbox'] = [int(xmin), int(ymin), int(xmax), int(ymax)]
                         objects['label'] = names[c]
+                        objects['prob'] = float(conf)
                         # path = 'lib/detection/crack_detection/run'
                         results.append(objects)
 
@@ -209,10 +211,10 @@ def run(
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image' :
-                    if  save_xml == True:
-                        continue
-                    else:
-                        cv2.imwrite(save_path, im0)
+                    if save_fusion_images:
+                        if  not os.path.exists(os.path.join(os.path.dirname(save_path),'detect_fusion_image')):
+                            os.makedirs(os.path.join(os.path.dirname(save_path),'detect_fusion_image'))
+                        cv2.imwrite(os.path.join(os.path.dirname(save_path),'detect_fusion_image',os.path.basename(save_path)), im0)
                 else:  # 'video' or 'stream'
                     if vid_path[i] != save_path:  # new video
                         vid_path[i] = save_path

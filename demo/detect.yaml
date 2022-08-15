@@ -1,0 +1,42 @@
+#####project name#########################################
+project_version: ft_0.1
+developer: wengjiangwei
+gt_xml_root : /home/wjw/Work/Data/ft/testSets/anno
+target: ['ftqx','ljdl']
+iou_thershold: 0.5
+###### project settings #################################
+weights: /home/wjw/Work/Runs/v5-test/ft2/weights/best.pt   # model.pt path(s)
+source: /home/wjw/Work/Data/ft/testSets   # file/dir/URL/glob  0 for webcam
+data: /home/wjw/Work/Data/ft_AutoXML_729/data.yaml   # dataset.yaml path
+imgsz: [640,640]  # inference size (height  width)
+
+project: /home/wjw/Work/Runs/v5-test   # save results to project/name
+name: detect  # save results to project/name
+PDF_path: /home/wjw/Work/YOLOV5_PDF
+
+
+save_txt:  true   # save results to *.txt
+save_conf:  true   # save confidences in --save-txt labels
+save_crop:  true   # save cropped prediction boxes
+save_xml :   true  # XML file
+save_fusion_images :  true   # save_fusion_images (image  conf and class)
+filter_img :  ~ 
+###### yolo settings #################################
+
+conf_thres: 0.25   # confidence threshold
+iou_thres: 0.45   # NMS IOU threshold
+max_det: 1000   # maximum detections per image
+device: ''   # cuda device  i.e. 0 or 0 1 2 3 or cpu
+view_img:  false   # show results
+nosave:  false   # do not save images/videos
+classes: ~   # filter by class: --class 0  or --class 0 2 3
+agnostic_nms:  false   # class-agnostic NMS
+augment:  false   # augmented inference
+visualize:  false   # visualize features
+update:  false   # update all models
+exist_ok:  false   # existing project/name ok  do not increment
+line_thickness: 3   # bounding box thickness (pixels)
+hide_labels:  false   # hide labels
+hide_conf:  false   # hide confidences
+half:  false   # use FP16 half-precision inference
+dnn:  false  # use OpenCV DNN for ONNX inference

@@ -104,6 +104,7 @@ def write_xml(path, results, w, h, output_root):
     for voc in results:
         obj = ET.SubElement(root, 'object')
         ET.SubElement(obj, 'name').text = voc['label']
+        ET.SubElement(obj, 'prob').text  = str(voc['prob'])
         ET.SubElement(obj, 'pose').text = 'Unspecified'
         ET.SubElement(obj, 'truncated').text = '0'
         ET.SubElement(obj, 'difficult').text = '0'
