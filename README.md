@@ -275,6 +275,16 @@ eg:
 
  *Waynejoneswjw@gmail.com*
 
+### TODO:
+
+1. Add the deep neural network model such as yolov3, yolox,...
+2. Interface specification (for all deep models)
+3. XML analyse Toolbox
+4. Active learning with labelimg tool
+5. Two stage learning such as detection and classification forms the one stage paradigm
+6. ensemble learning, few sample learning, fast learning and mixup method, etc.
+7. My academic work：PyTSK on the drawing board
+
 ### 版权说明
 
 该项目签署了MIT 授权许可，详情请参阅 [LICENSE](https://github.com/wengjiangwei/Honey/blob/main/LICENSE)
