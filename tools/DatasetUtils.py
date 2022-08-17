@@ -43,7 +43,7 @@ def _convert(size:list, box:list)->list:
     h = h * dh
     return (x, y, w, h)
 
-def _convert_annotation(save_path:str,image_id:str,det_class:list)->None:
+def convert_annotation(save_path:str,image_id:str,det_class:list)->None:
 
     """Read a save_path XML file and convert it into a txt file
     Note that: Need "convert" function to convert, included.

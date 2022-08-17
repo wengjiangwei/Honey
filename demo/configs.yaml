@@ -1,27 +1,27 @@
 ####PDF_information
-project_version: ft_0.1
-developer: wengjiangwei
+project_version: bileiqi_tk_v0.1 imges1k 
+developer: txkj@wengjiangwei
 
 ###### project settings #################################
 PDF_path : /home/wjw/Work/YOLOV5_PDF
  # type=str, default='...', help:training result file path
-root_path : /home/wjw/Work/Data/A_Rawdata/ft_AutoXML_729
+root_path : /home/wjw/Work/Data/A_Rawdata/bileiqi_tk_from_BileiqihtqsAndTower
  # type=str, default='...', help:raw image path that save the XML and JPG files.
-anno_path : /home/wjw/Work/Data/ft_AutoXML_729
+anno_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower
  # type=str, default='...', help:annotations and images folder.
-data : /home/wjw/Work/Data/ft_AutoXML_729/data.yaml
+data : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml
  # type=str, default='...', help:annotations and images folder.
-class_name : ["ftqx", 'ljdl']
+class_name : ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
  # type=list,  help:detection classes.
 train_val_prec: 0.1
  # type=float,  default=01, help:train and val samples ratio.
-project_path : /home/wjw/Work/Runs/v5-test
+project_path : /home/wjw/Work/Runs/train/belei_tk
  # same with project      #TODO:ignore the name
-project : /home/wjw/Work/Runs/v5-test
+project : /home/wjw/Work/Runs/train/bilei_tk
  # default='./runs/train', help='save to project/name'
-name : 'ft'
+name : 'bileiqi_tk'
  # type=str, default='exp', help='save to project/name'
-imgsz : 640 
+imgsz : 1024 
  # type=int, default=640, help='train, val image size (pixels'
 
 
@@ -33,7 +33,7 @@ cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5l.yaml
  # type=str, default='', help='model.yaml path'
 hyp : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/data/hyps/hyp.scratch-low.yaml
  # type=str, default='./data/hyps/hyp.scratch-low.yaml', help='hyperparameters path'
-epochs : 10 
+epochs : 100 
  # type=int, default=300
 batch-size : 8 
  # type=int, default=16, help='total batch size for all GPUs, -1 for autobatch'

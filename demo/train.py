@@ -7,11 +7,11 @@
 @Github :    https://github.com/wengjiangwei
 @Desc    :   
 # send the training report to email
-python train.py  --config_path ../demo/configs.yaml  --email_config ../demo/email_config.yaml  
+python train.py  --model_config ../demo/configs.yaml  --email_config ../demo/email_config.yaml  
             # Not send the training report to email
-python train.py  --config_path ../demo/configs.yaml
+python train.py  --model_config ../demo/configs.yaml
 # or  debug mode -> 
-        import train; train.run(config_path = r'../demo/configs.yaml',email_config = r'../email_config.yaml')
+        import train; train.run(model_config = r'../demo/configs.yaml',email_config = r'../email_config.yaml')
 '''
 
 
@@ -22,7 +22,7 @@ sys.path.append(r'/home/wjw/Work')# Honey path
 import yaml
 import argparse
 import re
-from Honey.tools import DatasetUtils
+from Honey.tools.DatasetUtils import convert2tempDatafolder
 from Honey.libs.det_module.yolov5_v6 import train as yolov5_train
 from Honey.tools.ReportUtils import TrainReport_yolov5
 from Honey.utils.EmailUtils import config2email,config2email_error
@@ -38,7 +38,7 @@ def main(opt:argparse):
         add_argument in the terminal format
     """    
     try:
-        with open(opt.config_path,'r') as f:
+        with open(opt.model_config,'r') as f:
             yaml_data = yaml.load(f,Loader=yaml.FullLoader)
 
         data = yaml_data['data']
@@ -46,7 +46,7 @@ def main(opt:argparse):
             os.makedirs(yaml_data['project_path'])
 
         if not os.path.exists(data):
-            DatasetUtils(yaml_data['root_path'], yaml_data['anno_path'], yaml_data['class_name'], yaml_data['train_val_prec'])
+            convert2tempDatafolder(yaml_data['root_path'], yaml_data['anno_path'], yaml_data['class_name'], yaml_data['train_val_prec'])
 
         yolov5_train.run(**yaml_data)
 
@@ -62,19 +62,20 @@ def main(opt:argparse):
             config2email(opt.email_config,email_attachment)
 
     except:
+        print(traceback.format_exc())
         # send error email
-        if opt.email_config is not None: # send email
-            config2email_error(opt.email_config,traceback.format_exc())
+        # if opt.email_config is not None: # send email
+        #     config2email_error(opt.email_config,traceback.format_exc())
 
 def parse_opt(known=False):
     # argparse in terminal
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config_path', type=str, help='initial filt path')
-    parser.add_argument('--email_config', type=str, default=None, help='initial filt path')
+    parser.add_argument('--model_config','--mconfig', type=str, help='initial filt path')
+    parser.add_argument('--email_config','--econfig', type=str, default=None, help='initial filt path')
     return parser.parse_known_args()[0] if known else parser.parse_args()
 
 def run(**kwargs):
-    # Usage: import train; train.run(config_path = r'../demo/configs.yaml',email_config = r'../email_config.yaml')
+    # Usage: import train; train.run(model_config = r'../demo/configs.yaml',email_config = r'../email_config.yaml')
 
     opt = parse_opt(True)
     for k, v in kwargs.items():
@@ -88,5 +89,6 @@ if __name__ == '__main__':
     opt = parse_opt()
     main(opt)
 
-    # run(config_path = r'../demo/configs.yaml',email_config = r'../email_config.yaml')
+
+    # run(model_config = r'/home/wjw/Work/Honey/demo/configs.yaml',email_config = r'/home/wjw/email_config.yaml')
     ...
