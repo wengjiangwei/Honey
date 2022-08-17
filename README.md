@@ -77,9 +77,12 @@ pip install -r requirements.txt  -i https://pypi.douban.com/simple/
 1. Train the model with config.yaml file
    ```sh
    cd ./demo
-   python train.py --config_path ./demo/config.yaml --email_config ./demo/email_config.yaml
+   python train.py --config_path ./config.yaml --email_config ./email_config.yaml
+   
    ```
-   😊 推荐使用绝对路径
+   ##路径仅供参考##
+
+   ##😊强烈推荐使用：绝对路径##
   - Config.yaml  
    ```sh
     ####PDF_information
@@ -135,7 +138,7 @@ pip install -r requirements.txt  -i https://pypi.douban.com/simple/
 ```
 2. Detect the images with detect.yaml file
    ```sh
-   python detect.py --config_path ./demo/detect.yaml --email_config ./demo/email_config.yaml
+   python detect.py --model_config ./detect.yaml --email_config ./email_config.yaml
    ```
   Detect config
 ```sh
