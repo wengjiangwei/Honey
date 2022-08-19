@@ -36,4 +36,7 @@ def report_max_idx(project_path:str, name:str)->str:
                 project_all.append(int(project_idx[0]))
             except Exception:
                 continue
-    return os.path.join(project_path, f"{name}{max(project_all)}")
+    try:
+        return os.path.join(project_path, f"{name}{max(project_all)}")
+    except :
+        return os.path.join(project_path, f"{name}")
