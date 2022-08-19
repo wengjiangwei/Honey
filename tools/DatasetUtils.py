@@ -43,7 +43,7 @@ def _convert(size:list, box:list)->list:
     h = h * dh
     return (x, y, w, h)
 
-def convert_annotation(save_path:str,image_id:str,det_class:list)->None:
+def _convert_annotation(save_path:str,image_id:str,det_class:list)->None:
 
     """Read a save_path XML file and convert it into a txt file
     Note that: Need "convert" function to convert, included.
@@ -88,6 +88,7 @@ def _spilt_dataset_coco(save_path:str,train_val_prece:float,det_class:list,datas
         det_class (list): detection objects for classification
         dataset_name (list, optional): _description_. Defaults to ['train','val'].
     """
+    #TODO IMG_FORMATS = 'bmp', 'dng', 'jpeg', 'jpg', 'mpo', 'png', 'tif', 'tiff', 'webp','JPG'
     total_xml = os.listdir(os.path.join(save_path,'Annotations'))
     num = len(total_xml)
     list = range(num)
@@ -118,9 +119,6 @@ def _spilt_dataset_coco(save_path:str,train_val_prece:float,det_class:list,datas
             if image_type == '.jpg':
                 list_file.write(os.path.join(save_path,'images','%s.jpg\n' % (image_id)))#
                 _convert_annotation(save_path,image_id,det_class)
-            elif image_type == '.JPG':
-                list_file.write(os.path.join(save_path,'images','%s.JPG\n' % (image_id)))#
-                _convert_annotation(save_path,image_id,det_class)
             else:
                 print("unknown image type!")
         list_file.close()
@@ -149,9 +147,20 @@ def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val
     
     img_set = []
     xml_set = []
+    #rename
+    if os.path.exists(os.path.join(root_path,'rename_log.txt')):
+        os.remove(os.path.join(root_path,'rename_log.txt'))
+    for img_name in os.listdir(root_path):
+        file_name = os.path.splitext(img_name)[1]
+        if file_name not in ['.xml','.jpg'] and file_name in ['.JPG','.JPEG','.jpeg']:
+            os.rename(os.path.join(root_path,img_name),
+                os.path.join(root_path,os.path.splitext(img_name)[0]+'.jpg'))
+            with open(os.path.join(root_path,'rename_log.txt'),'a') as f:
+                f.write(f'{img_name}\n')
+
     #TODO: add image type: JPG/jpg/jpeg etc...
     for img_name in os.listdir(root_path):
-        if os.path.splitext(img_name)[1]=='.jpg' or os.path.splitext(img_name)[1]== ".JPG":
+        if os.path.splitext(img_name)[1]=='.jpg':
             img_set.append(img_name)
         elif os.path.splitext(img_name)[1]=='.xml':
             xml_set.append(img_name)

@@ -1,16 +1,16 @@
 #####project name#########################################
-project_version: ft_0.1
-developer: wengjiangwei
-gt_xml_root : /home/wjw/Work/Data/ft/testSets/anno
-target: ['ftqx','ljdl']
+project_version: bileiqi_tk_v0.1 imges1k 
+developer: txkj@wengjiangwei
+gt_xml_root : /home/wjw/Work/Data/A_Rawdata/bileiqi_tk_from_BileiqihtqsAndTower
+target: ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
 
 ###### project settings #################################
-weights: /home/wjw/Work/Runs/v5-test/ft2/weights/best.pt   # model.pt path(s)
-source: /home/wjw/Work/Data/ft/testSets   # file/dir/URL/glob  0 for webcam
-data: /home/wjw/Work/Data/ft_AutoXML_729/data.yaml   # dataset.yaml path
+weights: /home/wjw/Work/Runs/train/bilei_tk/bileiqi_tk5/weights/best.pt   # model.pt path(s)
+source: /home/wjw/Work/Data/TEST_bileiqi_tk   # file/dir/URL/glob  0 for webcam
+data: /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml   # dataset.yaml path
 imgsz: [640,640]  # inference size (height  width)
 
-project: /home/wjw/Work/Runs/v5-test   # save results to project/name
+project: /home/wjw/Work/Runs/train/bilei_tk/   # save results to project/name
 name: detect  # save results to project/name
 PDF_path: /home/wjw/Work/YOLOV5_PDF
 

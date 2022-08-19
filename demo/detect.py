@@ -53,17 +53,17 @@ def main(opt:argparse):
         yolov5_detect.run(**yaml_data)
 
         #report the results
-        SAVE_PROJECT_PATH = report_max_idx(yaml_data['project'],yaml_data['name'])
-        PROJECT_INFOR = [PROJECT_VERSION,DEVELOPER]
-        SVAE_PDF_PATH = PDF_PATH
-        GT_XML_ROOT = GT_XML_ROOT
-        TARGET = TARGET
-        IOU_THERSHOLD = IOU_THERSHOLD
-        res = DetectReport_yolov5(SAVE_PROJECT_PATH,SVAE_PDF_PATH,GT_XML_ROOT,TARGET,IOU_THERSHOLD)
-        email_attachment = res.write(PROJECT_INFOR)
+        # SAVE_PROJECT_PATH = report_max_idx(yaml_data['project'],yaml_data['name'])
+        # PROJECT_INFOR = [PROJECT_VERSION,DEVELOPER]
+        # SVAE_PDF_PATH = PDF_PATH
+        # GT_XML_ROOT = GT_XML_ROOT
+        # TARGET = TARGET
+        # IOU_THERSHOLD = IOU_THERSHOLD
+        # res = DetectReport_yolov5(SAVE_PROJECT_PATH,SVAE_PDF_PATH,GT_XML_ROOT,TARGET,IOU_THERSHOLD)
+        # email_attachment = res.write(PROJECT_INFOR)
         # send email
         if opt.email_config is not None: 
-            config2email(opt.email_config,email_attachment)
+            config2email(opt.email_config,'/home/wjw/Work/YOLOV5_PDF/Test report bileiqi_tk_v0.1 imges1k.pdf')
 
     except:
         print(traceback.format_exc())

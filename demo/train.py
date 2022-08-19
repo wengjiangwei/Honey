@@ -18,7 +18,9 @@ python train.py  --model_config ../demo/configs.yaml
 import os
 import sys
 from tkinter import E
-sys.path.append(r'/home/wjw/Work')# Honey path
+module_dir = os.path.abspath(os.path.join(os.getcwd(), "../.."))
+sys.path.insert(0, module_dir)
+print(sys.path)
 import yaml
 import argparse
 import re

@@ -155,79 +155,82 @@ class TrainReport_yolov5(Report_base):
                                 'results', 'labels','labels_correlogram', 'confusion_matrix']
 
                 for idx_except in  expect_index:
-                    idx_sub = subsection_name[idx].index(idx_except)
-                    with doc.create(Subsection(subsection_name[idx][idx_sub])):
-                        if idx == 0:
-                            with open(file[idx_sub], 'r', encoding='utf-8') as f:
-                                data = yaml.load(f.read(), Loader=yaml.SafeLoader)
-                                with doc.create(LongTable("c c")) as data_table:
+                    try:
+                        idx_sub = subsection_name[idx].index(idx_except)
+                        with doc.create(Subsection(subsection_name[idx][idx_sub])):
+                            if idx == 0:
+                                with open(file[idx_sub], 'r', encoding='utf-8') as f:
+                                    data = yaml.load(f.read(), Loader=yaml.SafeLoader)
+                                    with doc.create(LongTable("c c")) as data_table:
+                                        data_table.add_hline()
+                                        data_table.add_row(["Parameters", "Values"])
+                                        data_table.add_hline()
+                                        data_table.end_table_header()
+                                        data_table.add_hline()
+                                        # data_table.add_row((MultiColumn(2, align='r', data='Continued on Next Page'),))
+
+                                        data_table.add_hline()
+                                        data_table.end_table_footer()
+                                        data_table.add_hline()
+                                        # data_table.add_row((MultiColumn(2, align='r', data='Continued on Next Page'),))
+
+                                        data_table.add_hline()
+                                        data_table.end_table_last_footer()
+
+                                        for key, value in data.items():
+                                            data_table.add_row([key,value])
+                            elif idx == 1:
+
+                                csv_reader = csv.reader(open(file[idx_sub]),)
+                                csv_reader.__next__()
+                                with doc.create(LongTable("c c c c c c c")) as data_table:
                                     data_table.add_hline()
-                                    data_table.add_row(["Parameters", "Values"])
+                                    data_table.add_row(['epoch',' train/box_loss','train/obj_loss','train/cls_loss','precision',\
+                                            'recall','mAP_0.5',])
                                     data_table.add_hline()
                                     data_table.end_table_header()
                                     data_table.add_hline()
-                                    # data_table.add_row((MultiColumn(2, align='r', data='Continued on Next Page'),))
+                                    # data_table.add_row((MultiColumn(7, align='r', data='Continued on Next Page'),))
 
                                     data_table.add_hline()
                                     data_table.end_table_footer()
                                     data_table.add_hline()
-                                    # data_table.add_row((MultiColumn(2, align='r', data='Continued on Next Page'),))
-
-                                    data_table.add_hline()
-                                    data_table.end_table_last_footer()
-
-                                    for key, value in data.items():
-                                        data_table.add_row([key,value])
-                        elif idx == 1:
-
-                            csv_reader = csv.reader(open(file[idx_sub]),)
-                            csv_reader.__next__()
-                            with doc.create(LongTable("c c c c c c c")) as data_table:
-                                data_table.add_hline()
-                                data_table.add_row(['epoch',' train/box_loss','train/obj_loss','train/cls_loss','precision',\
-                                        'recall','mAP_0.5',])
-                                data_table.add_hline()
-                                data_table.end_table_header()
-                                data_table.add_hline()
-                                # data_table.add_row((MultiColumn(7, align='r', data='Continued on Next Page'),))
-
-                                data_table.add_hline()
-                                data_table.end_table_footer()
-                                data_table.add_hline()
-                                # data_table.add_row((MultiColumn(7, align='r', data='Continued on Next Page'),))
-
-                                data_table.add_hline()
-                                data_table.end_table_last_footer()
-                                for line in csv_reader:
-                                    data_table.add_row(line[:7])
-                            csv_reader = csv.reader(open(file[idx_sub]),)
-                            csv_reader.__next__()
-                            with doc.create(LongTable("c c c c c c c c")) as data_table:
-                                    data_table.add_hline()
-                                    data_table.add_row(['epoch','mAP_0.5:0.95','val/box_loss','val/obj_loss',\
-                                            'val/cls_loss','x/lr0','x/lr1','x/lr2'])
-                                    data_table.add_hline()
-                                    data_table.end_table_header()
-                                    data_table.add_hline()
-                                    # data_table.add_row((MultiColumn(8, align='r', data='Continued on Next Page'),))
-
-                                    data_table.add_hline()
-                                    data_table.end_table_footer()
-                                    data_table.add_hline()
-                                    # data_table.add_row((MultiColumn(8, align='r', data='Continued on Next Page'),))
+                                    # data_table.add_row((MultiColumn(7, align='r', data='Continued on Next Page'),))
 
                                     data_table.add_hline()
                                     data_table.end_table_last_footer()
                                     for line in csv_reader:
-                                        data_temp = line[7:]
-                                        data_temp.insert(0,line[0])
-                                        data_table.add_row(data_temp)
-                        elif idx == 2:
-                            with doc.create(Figure(position='H')) as plot:
-                                plot.add_image(file[idx_sub], width=NoEscape(r'0.5\linewidth'))
-                                # plot.add_caption('I am a caption.')
+                                        data_table.add_row(line[:7])
+                                csv_reader = csv.reader(open(file[idx_sub]),)
+                                csv_reader.__next__()
+                                with doc.create(LongTable("c c c c c c c c")) as data_table:
+                                        data_table.add_hline()
+                                        data_table.add_row(['epoch','mAP_0.5:0.95','val/box_loss','val/obj_loss',\
+                                                'val/cls_loss','x/lr0','x/lr1','x/lr2'])
+                                        data_table.add_hline()
+                                        data_table.end_table_header()
+                                        data_table.add_hline()
+                                        # data_table.add_row((MultiColumn(8, align='r', data='Continued on Next Page'),))
 
-                    # TODO: BAD CASE analyse
+                                        data_table.add_hline()
+                                        data_table.end_table_footer()
+                                        data_table.add_hline()
+                                        # data_table.add_row((MultiColumn(8, align='r', data='Continued on Next Page'),))
+
+                                        data_table.add_hline()
+                                        data_table.end_table_last_footer()
+                                        for line in csv_reader:
+                                            data_temp = line[7:]
+                                            data_temp.insert(0,line[0])
+                                            data_table.add_row(data_temp)
+                            elif idx == 2:
+                                    with doc.create(Figure(position='H')) as plot:
+                                        plot.add_image(file[idx_sub], width=NoEscape(r'0.5\linewidth'))
+                    except:
+                        continue
+                                    # plot.add_caption('I am a caption.')
+
+                        # TODO: BAD CASE analyse
 
                             
 class DetectReport_yolov5(Report_base):

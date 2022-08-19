@@ -1,4 +1,5 @@
 **/__pycache__                                                               //忽略pycache缓存文件
-*.pyc
+* */.pyc
 **/wandb
 **/__pycache__
+email_config.yaml
