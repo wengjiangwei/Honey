@@ -118,9 +118,13 @@ class TrainReport_yolov5(Report_base):
 
         doc.append(NoEscape('\maketitle'))
         self._fill_document(doc)
-        doc.generate_pdf(os.path.join(self.PDF_path,f'report {project_infor[0]}'), clean_tex=False)
+        if not os.path.exists(os.path.join(self.PDF_path,f'report {project_infor[0]}')):
+            PDF_data = doc.generate_pdf(os.path.join(self.PDF_path,f'report {project_infor[0]}'), clean_tex=False)
+        else :
+            import time
+            PDF_data = doc.generate_pdf(os.path.join(self.PDF_path,f'check_report {project_infor[0]}, data: {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}'), clean_tex=False)
         tex = doc.dumps()
-        return os.path.join(self.PDF_path,f'report {project_infor[0]}.pdf') # PDF Document
+        return PDF_data
 
 
     def _fill_document(self, doc):
@@ -375,11 +379,11 @@ class DetectReport_yolov5(Report_base):
                         with doc.create(Figure(position='H')) as plot:
                                 plot.add_image(img_path, width=NoEscape(r'0.5\linewidth'))
                 #     # TODO: BAD CASE analyse
-        with doc.create(Section("Bad Case Analyse")):
-            bad_case_path = xml_res.bad_case(conf_thershold=0.5)
-            for bad_case in bad_case_path:
-                with doc.create(Figure(position='H')) as plot:
-                    plot.add_image(bad_case, width=NoEscape(r'0.5\linewidth'))
+        # with doc.create(Section("Bad Case Analyse")):
+        #     bad_case_path = xml_res.bad_case(conf_thershold=0.5)
+        #     for bad_case in bad_case_path:
+        #         with doc.create(Figure(position='H')) as plot:
+        #             plot.add_image(bad_case, width=NoEscape(r'0.5\linewidth'))
 
 
 
@@ -388,8 +392,8 @@ class DetectReport_yolov5(Report_base):
 
 if __name__ == '__main__':
 
-    SAVE_PROJECT_PATH = r"/home/wjw/Work/Runs/v5-ft/ft8"
-    SVAE_PDF_PATH = r"/home/wjw/Work/YOLOV5_PDF"
+    SAVE_PROJECT_PATH = r"..."
+    SVAE_PDF_PATH = r"..."
     PROJECT_INFOR = ["ft_v1","WENGJIANGWEI"]
     res = TrainReport_yolov5(SAVE_PROJECT_PATH,SVAE_PDF_PATH)
     res.write(PROJECT_INFOR)

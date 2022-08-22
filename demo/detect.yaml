@@ -1,17 +1,17 @@
 #####project name#########################################
-project_version: bileiqi_tk_v0.1 imges1k 
+project_version: bileiqi_tk_v0.2 imges1k 
 developer: txkj@wengjiangwei
-gt_xml_root : /home/wjw/Work/Data/A_Rawdata/bileiqi_tk_from_BileiqihtqsAndTower
+gt_xml_root : /home/wjw/Work/Data/TEST_bileiqi_tk
 target: ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
 
 ###### project settings #################################
-weights: /home/wjw/Work/Runs/train/bilei_tk/bileiqi_tk5/weights/best.pt   # model.pt path(s)
-source: /home/wjw/Work/Data/TEST_bileiqi_tk   # file/dir/URL/glob  0 for webcam
+weights: /home/wjw/Work/Runs/train/bileiqi_tk9/weights/best.pt   # model.pt path(s)
+source: /home/wjw/Work/Data/TEST_bileiqi_tk2   # file/dir/URL/glob  0 for webcam
 data: /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml   # dataset.yaml path
-imgsz: [640,640]  # inference size (height  width)
+imgsz: [1024,1024]  # inference size (height  width)
 
-project: /home/wjw/Work/Runs/train/bilei_tk/   # save results to project/name
-name: detect  # save results to project/name
+project: /home/wjw/Work/Runs/detect/   # save results to project/name
+name: bilei_tk  # save results to project/name
 PDF_path: /home/wjw/Work/YOLOV5_PDF
 
 
@@ -23,7 +23,7 @@ save_fusion_images :  true   # save_fusion_images (image  conf and class)
 filter_img :  ~ 
 ###### yolo settings #################################
 
-conf_thres: 0.25   # confidence threshold
+conf_thres: 0.7   # confidence threshold
 iou_thres: 0.5   # NMS IOU threshold
 max_det: 1000   # maximum detections per image
 device: ''   # cuda device  i.e. 0 or 0 1 2 3 or cpu

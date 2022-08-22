@@ -1,4 +1,4 @@
-**/__pycache__                                                               //忽略pycache缓存文件
+**/__pycache__  
 * */.pyc
 **/wandb
 **/__pycache__

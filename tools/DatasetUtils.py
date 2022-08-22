@@ -187,6 +187,66 @@ def convert2tempDatafolder(root_path:str,save_path:str,class_name:list,train_val
     with open(os.path.join(save_path,'data.yaml'),'w',encoding="utf-8") as f:
         yaml.dump(desired_caps,f)
 
+
+def json2yaml(datasetsdir:str,ucd_list:list,xmlsdir:str,save_path:str,class_name:list,train_val_prece:float=0.2)->None:
+    """convert2tempDatafolder with  dataset_coco format 
+    Note that: this function is used to convert dataset from labelimg to 
+    train the yolov5 (suitable model), maybe also fit other yolo-series models.
+    intput: (JPG and XML files) folder
+    output: (ROOT path + annotations folder, images folder, JPEGImages folder, imagesets folder, train.txt and val.txt)
+    # please check JPG and jpg ！
+
+    Args:
+        datasetsdir(str): images folder for all images
+        root_path (str): image and XML file generated from labelimg directly.
+        save_path (str): the target path that saves all sub-folders (i.e., Annotations labels & JPEGImages)
+        class_name (list): select the detection class to use.
+        train_val_prece (float, optional): spilt the datasets with the given ratio. Defaults to 0.2.
+    """
+
+    warning("CHECK: target annotation axis is (x,y,width,height)")
+    warning(f"CHECK: train_val_prece is {train_val_prece}")
+    if not os.path.exists(save_path):
+        file_set =['Annotations','images','ImageSets','JPEGImages']
+        for file_name in file_set:
+            os.makedirs(os.path.join(save_path,file_name))
+    
+    img_set = []
+    xml_set = []
+    #rename
+    if os.path.exists(os.path.join(save_path,'rename_log.txt')):
+        os.remove(os.path.join(save_path,'rename_log.txt'))
+
+
+    #TODO: add image type: JPG/jpg/jpeg etc...
+    for img_name in os.listdir(xmlsdir):
+        
+        if os.path.splitext(img_name)[1]=='.xml':
+            xml_set.append(img_name)
+        else:
+            warning("Unknown formats!")
+
+    for img_name in tqdm(ucd_list,desc='Images copying'): 
+        shutil.copyfile(os.path.join(datasetsdir,'img',img_name+'.jpg'),os.path.join(save_path,'images',img_name),)
+        shutil.copyfile(os.path.join(datasetsdir,'img',img_name+'.jpg'),os.path.join(save_path,'JPEGImages',img_name))
+
+    for xml_name in tqdm(xml_set,desc='XMLs copying'): 
+        shutil.copyfile(os.path.join(xmlsdir,xml_name),os.path.join(save_path,'Annotations',xml_name))
+
+    if train_val_prece is not None:
+        _spilt_dataset_coco(save_path,train_val_prece,class_name)
+
+    desired_caps = {
+    'train':os.path.join(save_path,"train.txt"),
+    'val':os.path.join(save_path,"val.txt"),
+    'nc':len(class_name),
+    'names':class_name,
+                    }
+
+    with open(os.path.join(save_path,'data.yaml'),'w',encoding="utf-8") as f:
+        yaml.dump(desired_caps,f)
+
+
 if __name__ == '__main__':
 
     ROOT_PATH = ...

@@ -63,7 +63,7 @@ def main(opt:argparse):
         email_attachment = res.write(PROJECT_INFOR)
         # send email
         if opt.email_config is not None: 
-            config2email(opt.email_config,'/home/wjw/Work/YOLOV5_PDF/Test report bileiqi_tk_v0.1 imges1k.pdf')
+            config2email(opt.email_config,email_attachment)
 
     except:
         print(traceback.format_exc())
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     # opt = parse_opt()
     # main(opt)
 
-    run(config_path=r'/home/wjw/Work/Honey/demo/detect.yaml', email_config=r'/home/wjw/email_config.yaml')
+    run(config_path=r'/home/wjw/Work/Honey/demo/detect.yaml', email_config=r'/home/wjw/Work/Honey/email_config.yaml')
 
     
 

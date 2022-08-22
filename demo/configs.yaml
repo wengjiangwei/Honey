@@ -2,42 +2,56 @@
 project_version: bileiqi_tk_v0.2 imges1k yolov5m6
 developer: txkj@wengjiangwei
 
+###### ucd settings #################################
+ucd_path: /home/ldq/Apps_jokker/ucd
+ucd_name: wjw\\beleiqi_tk_from_bileiqihtqsAndTower
+json_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/bileiqi_tk_from_BileiqihtqsAndTower.json
+datasetsDir : /home/wjw/Work/Database
+xmlsdir : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/Annotations
+image_num: 956
 ###### project settings #################################
+_path_ : 
+
 PDF_path : /home/wjw/Work/YOLOV5_PDF
  # type=str, default='...', help:training result file path
 root_path : /home/wjw/Work/Data/A_Rawdata/bileiqi_tk_from_BileiqihtqsAndTower
+ # UCD mode can be ignored
  # type=str, default='...', help:raw image path that save the XML and JPG files.
+project_path : /home/wjw/Work/Runs/train
+ # same with project      #TODO:ignore the name
+name : 'bileiqi_tk'
+ # type=str, default='exp', help='save to project/name'
+class_name : ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
+
+ # type=list,  help:detection classes.
+imgsz : 1024
+ # type=int, default=640, help='train, val image size (pixels'
+
+train_val_prec: 0.1
+ # type=float,  default=01, help:train and val samples ratio.
+
 anno_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower
  # type=str, default='...', help:annotations and images folder.
 data : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml
  # type=str, default='...', help:annotations and images folder.
-class_name : ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
- # type=list,  help:detection classes.
-train_val_prec: 0.1
- # type=float,  default=01, help:train and val samples ratio.
-project_path : /home/wjw/Work/Runs/train/bilei_tk
- # same with project      #TODO:ignore the name
-project : /home/wjw/Work/Runs/train/bilei_tk
+project : /home/wjw/Work/Runs/train
  # default='./runs/train', help='save to project/name'
-name : 'bileiqi_tk'
- # type=str, default='exp', help='save to project/name'
-imgsz : 960
- # type=int, default=640, help='train, val image size (pixels'
+
 
 
 
 ###### yolo settings #################################
-weights : /home/wjw/Work/Weights/YOLOV5/yolov5m6.pt
+weights : /home/wjw/Work/Weights/YOLOV5/yolov5x.pt
  # type=str, default='./yolov5s.pt', help='initial weights path'
-cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5m.yaml
+cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5x.yaml
  # type=str, default='', help='model.yaml path'
 hyp : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/data/hyps/hyp.scratch-high.yaml
  # type=str, default='./data/hyps/hyp.scratch-low.yaml', help='hyperparameters path'
 epochs : 100 
  # type=int, default=300
-batch_size : 4
+batch_size : 8
  # type=int, default=16, help='total batch size for all GPUs, -1 for autobatch'
-device : 0
+device : 0,1
  #  default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu'
 optimizer : 'SGD'
  #  type=str, choices=['SGD', 'Adam', 'AdamW'], default='SGD', help='optimizer'
