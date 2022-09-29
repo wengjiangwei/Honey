@@ -1,17 +1,17 @@
 #####project name#########################################
-project_version: bileiqi_tk_v0.2 imges1k 
+project_version: nc_pretrain 
 developer: txkj@wengjiangwei
-gt_xml_root : /home/wjw/Work/Data/TEST_bileiqi_tk
-target: ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
+gt_xml_root : /home/wjw/Work/Data/nc
+target: ['nc']
 
-###### project settings #################################
-weights: /home/wjw/Work/Runs/train/bileiqi_tk9/weights/best.pt   # model.pt path(s)
-source: /home/wjw/Work/Data/TEST_bileiqi_tk2   # file/dir/URL/glob  0 for webcam
+###### project settings ################################
+weights: /home/wjw/Work/Weights/Trained_model/gt-nc/nc_yolov5_0_1_10.pt   # model.pt path(s)
+source: /home/wjw/Work/Data/nc   # file/dir/URL/glob  0 for webcam
 data: /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml   # dataset.yaml path
 imgsz: [1024,1024]  # inference size (height  width)
 
 project: /home/wjw/Work/Runs/detect/   # save results to project/name
-name: bilei_tk  # save results to project/name
+name: nc  # save results to project/name
 PDF_path: /home/wjw/Work/YOLOV5_PDF
 
 

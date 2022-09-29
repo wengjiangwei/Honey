@@ -130,8 +130,8 @@ def run(**kwargs):
 
 if __name__ == '__main__':
 
-    opt = parse_opt()
-    main(opt)
+    # opt = parse_opt()
+    # main(opt)
 
-    # run(model_config = r'/home/wjw/Work/Honey/demo/configs.yaml',email_config = r'/home/wjw/Work/Honey/email_config.yaml')
+    run(model_config = r'/home/wjw/Work/Honey/demo/configs.yaml')
     ...

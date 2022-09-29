@@ -1,27 +1,27 @@
 ####PDF_information
-project_version: bileiqi_tk_v0.2 imges1k yolov5m6
+project_version: nc
 developer: txkj@wengjiangwei
 
 ###### ucd settings #################################
 ucd_path: /home/ldq/Apps_jokker/ucd
 ucd_name: wjw\\beleiqi_tk_from_bileiqihtqsAndTower
 json_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/bileiqi_tk_from_BileiqihtqsAndTower.json
-datasetsDir : /home/wjw/Work/Database
-xmlsdir : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/Annotations
-image_num: 956
+datasetsDir : /home/wjw/Work/Honey/nc
+xmlsdir : /home/wjw/Work/Honey/nc/
+image_num: 1024
 ###### project settings #################################
 _path_ : 
 
-PDF_path : /home/wjw/Work/YOLOV5_PDF
+PDF_path : /home/wjw/Work/Honey/YOLOV5_PDF
  # type=str, default='...', help:training result file path
-root_path : /home/wjw/Work/Data/A_Rawdata/bileiqi_tk_from_BileiqihtqsAndTower
+root_path : /home/wjw/Work/Honey/nc
  # UCD mode can be ignored
  # type=str, default='...', help:raw image path that save the XML and JPG files.
-project_path : /home/wjw/Work/Runs/train
+project_path : /home/wjw/Work/Honey/train
  # same with project      #TODO:ignore the name
-name : 'bileiqi_tk'
+name : 'nc'
  # type=str, default='exp', help='save to project/name'
-class_name : ['bilei_tk', 'bilei_tk_line','bilei_tk_sub']
+class_name : ['nc']
 
  # type=list,  help:detection classes.
 imgsz : 1024
@@ -30,18 +30,18 @@ imgsz : 1024
 train_val_prec: 0.1
  # type=float,  default=01, help:train and val samples ratio.
 
-anno_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower
+anno_path : /home/wjw/Work/Honey/dataset/nc/
  # type=str, default='...', help:annotations and images folder.
-data : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/data.yaml
+data : /home/wjw/Work/Honey/dataset/nc/data.yaml
  # type=str, default='...', help:annotations and images folder.
-project : /home/wjw/Work/Runs/train
+project : /home/wjw/Work/Honey/train
  # default='./runs/train', help='save to project/name'
 
 
 
 
 ###### yolo settings #################################
-weights : /home/wjw/Work/Weights/YOLOV5/yolov5x.pt
+weights : /home/wjw/Work/Honey/Weights/YOLOV5/yolov5x.pt
  # type=str, default='./yolov5s.pt', help='initial weights path'
 cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5x.yaml
  # type=str, default='', help='model.yaml path'
