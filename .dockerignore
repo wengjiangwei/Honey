@@ -1,0 +1,9 @@
+.vscode
+__pycache__
+code_temp
+Data
+Database
+labelImg-master
+minio
+Runs
+YOLOV5_PDF

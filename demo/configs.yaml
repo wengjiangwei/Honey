@@ -12,12 +12,12 @@ image_num: 1024
 ###### project settings #################################
 _path_ : 
 
-PDF_path : /home/wjw/Work/Honey/YOLOV5_PDF
+PDF_path : /home/wjw/Work/YOLOV5_PDF
  # type=str, default='...', help:training result file path
-root_path : /home/wjw/Work/Honey/nc
+root_path : /home/wjw/Work/Data/nc
  # UCD mode can be ignored
  # type=str, default='...', help:raw image path that save the XML and JPG files.
-project_path : /home/wjw/Work/Honey/train
+project_path : /home/wjw/Work/Runs/train
  # same with project      #TODO:ignore the name
 name : 'nc'
  # type=str, default='exp', help='save to project/name'
@@ -30,18 +30,18 @@ imgsz : 1024
 train_val_prec: 0.1
  # type=float,  default=01, help:train and val samples ratio.
 
-anno_path : /home/wjw/Work/Honey/dataset/nc/
+anno_path : /home/wjw/Work/dataset/nc/
  # type=str, default='...', help:annotations and images folder.
-data : /home/wjw/Work/Honey/dataset/nc/data.yaml
+data : /home/wjw/Work/dataset/nc/data.yaml
  # type=str, default='...', help:annotations and images folder.
-project : /home/wjw/Work/Honey/train
+project : /home/wjw/Work/Runs/train
  # default='./runs/train', help='save to project/name'
 
 
 
 
 ###### yolo settings #################################
-weights : /home/wjw/Work/Honey/Weights/YOLOV5/yolov5x.pt
+weights : /home/wjw/Work/Weights/YOLOV5/yolov5x.pt
  # type=str, default='./yolov5s.pt', help='initial weights path'
 cfg : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/models/yolov5x.yaml
  # type=str, default='', help='model.yaml path'

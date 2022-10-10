@@ -1,10 +1,30 @@
-# python 3.8.8 | torch 1.8.1 | torchvision 0.9.1
-FROM fa8e7098ab0f 
-RUN set -xe \
-    && apt-get update \
-    && apt-get install python3-pip
+FROM 3850639cdf7a
+# 1.9.0-cuda10.2-cudnn7-runtime
+#维护者
+LABEL maintainer='wjw'
+# 安装miniconda
+WORKDIR workspace
+RUN cd ..
+RUN chmod 777 workspace -R
+RUN mkdir -p /workspace/Honey/
+RUN mkdir -p /workspace/Weights/
 
-RUN pip install -r /docker/requirement.txt -i https://pypi.douban.com/simple
+RUN DEBIAN_FRONTEND=noninteractive \
+    && apt-get update -y \
+    && apt-get install -y wget gcc g++ \
+    && apt-get install -y vim
 
-# -id, Run container in background and print container ID
-# docker run --gpus device=0 -p 111:111  -e port=111 -v /home/ldq/output_test:/usr/output_dir  -v /home/ldq/logs_dir:/usr/logs -d jibei:v2.0.10 /$params.release_tag/start_server_jibei.sh
+RUN DEBIAN_FRONTEND=noninteractive apt-get install latexmk -y
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y texlive-latex-extra -y
+
+ADD ./Honey/ /workspace/Honey/
+ADD ./Weights/ /workspace/Weights/
+ADD ./Dataset/ /workspace/Dataset/
+ADD ./requirements.txt /workspace/requirements.txt
+
+RUN /bin/bash -c "pip install -r /workspace/requirements.txt -i https://pypi.douban.com/simple"         
+# 环境设置 
+# EXPOSE 8080 
+# ENV JAVA_HOME /usr/local/java/jdk-11.0.6/
+# ENV PATH $PATH:$JAVA_HOME/bin
