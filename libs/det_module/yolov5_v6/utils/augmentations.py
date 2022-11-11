@@ -44,7 +44,7 @@ class Albumentations:
         return im, labels
 
 
-def augment_hsv(im, hgain=0.5, sgain=0.5, vgain=0.5):
+def augment_hsv(im, hgain=0.5, sgain=0.5, vgain=0.5, light=0.0):
     # HSV color-space augmentation
     if hgain or sgain or vgain:
         r = np.random.uniform(-1, 1, 3) * [hgain, sgain, vgain] + 1  # random gains
@@ -58,6 +58,13 @@ def augment_hsv(im, hgain=0.5, sgain=0.5, vgain=0.5):
 
         im_hsv = cv2.merge((cv2.LUT(hue, lut_hue), cv2.LUT(sat, lut_sat), cv2.LUT(val, lut_val)))
         cv2.cvtColor(im_hsv, cv2.COLOR_HSV2BGR, dst=im)  # no return needed
+    if light>0.0:
+        # 增加图像亮度
+        v1 = np.clip(cv2.add(1*val,light),0,255)
+        img1 = np.uint8(cv2.merge((hue,sat,v1)))
+        cv2.cvtColor(img1, cv2.COLOR_HSV2BGR, dst=im) 
+
+
 
 
 def hist_equalize(im, clahe=True, bgr=False):

@@ -1,38 +1,38 @@
 ####PDF_information
-project_version: nc
+project_version: 2022_11_08_gjdw
 developer: txkj@wengjiangwei
 
 ###### ucd settings #################################
 ucd_path: /home/ldq/Apps_jokker/ucd
 ucd_name: wjw\\beleiqi_tk_from_bileiqihtqsAndTower
-json_path : /home/wjw/Work/Data/bileiqi_tk_from_BileiqihtqsAndTower/bileiqi_tk_from_BileiqihtqsAndTower.json
-datasetsDir : /home/wjw/Work/Honey/nc
-xmlsdir : /home/wjw/Work/Honey/nc/
+json_path : /home/wjw/Work/Data/
+datasetsDir : /home/wjw/Work/
+xmlsdir : /home/wjw/Work/
 image_num: 1024
 ###### project settings #################################
-_path_ : 
 
+###### project settings #################################
 PDF_path : /home/wjw/Work/YOLOV5_PDF
  # type=str, default='...', help:training result file path
-root_path : /home/wjw/Work/Data/nc
+root_path : /home/wjw/Work/Data/2022_11_08_gjdw
  # UCD mode can be ignored
  # type=str, default='...', help:raw image path that save the XML and JPG files.
 project_path : /home/wjw/Work/Runs/train
  # same with project      #TODO:ignore the name
-name : 'nc'
+name : 'gjdw'
  # type=str, default='exp', help='save to project/name'
-class_name : ['nc']
+class_name : ['aqd_dggy','aqd_gfsy','aqd_zqpd','aqd_wzqpd','aqd_wpd']
 
  # type=list,  help:detection classes.
 imgsz : 1024
  # type=int, default=640, help='train, val image size (pixels'
 
-train_val_prec: 0.1
+train_val_prec: 0.2
  # type=float,  default=01, help:train and val samples ratio.
 
-anno_path : /home/wjw/Work/dataset/nc/
+anno_path : /home/wjw/Work/dataset/2022_11_08_gjdw/
  # type=str, default='...', help:annotations and images folder.
-data : /home/wjw/Work/dataset/nc/data.yaml
+data : /home/wjw/Work/dataset/2022_11_08_gjdw/data.yaml
  # type=str, default='...', help:annotations and images folder.
 project : /home/wjw/Work/Runs/train
  # default='./runs/train', help='save to project/name'
@@ -49,9 +49,9 @@ hyp : /home/wjw/Work/Honey/libs/det_module/yolov5_v6/data/hyps/hyp.scratch-high.
  # type=str, default='./data/hyps/hyp.scratch-low.yaml', help='hyperparameters path'
 epochs : 100 
  # type=int, default=300
-batch_size : 8
+batch_size : 2
  # type=int, default=16, help='total batch size for all GPUs, -1 for autobatch'
-device : 0,1
+device : 0
  #  default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu'
 optimizer : 'SGD'
  #  type=str, choices=['SGD', 'Adam', 'AdamW'], default='SGD', help='optimizer'
